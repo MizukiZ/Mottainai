@@ -17,6 +17,7 @@ class ConversationsController < ApplicationController
   end
 
   def show
+    authorize @conversation
     @messages = @conversation.messages
     @last_message = @messages.last
     @new_message = Message.new
