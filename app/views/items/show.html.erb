@@ -26,7 +26,7 @@
           </div>
 
           <div class="col-8 items-margin font-weight-bold">
-            <% if @item.chargeable? %>
+            <% if @item.chargeable? && current_user.profile.nationality != "AU" %>
             <% if @currency_convert == false %>
             <%= link_to item_path(@item.id, conversion: "y"), class: 'link-word-user' do %>
             <%= fa_icon 'money', text: 'convert to your country currency' %>
