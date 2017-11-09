@@ -37,6 +37,7 @@ And, also I had two problems when I deployed on heroku. That were Assets pipelin
 ## Technical issues
 For some reason, I became not able to push application data to git remote repository. It hang at writing objects section. Probably, I have added a huge binary files or folder to git which I should have set as gitignore file. I end up deleting the current git and making new git and remote
 repository.
+![git issue ](https://github.com/MizukiZ/Mottainai/blob/readme-images/readme_image/git%20issue.JPG "git issue")
 
 
 [Previous repository](https://github.com/MizukiZ/rails-project/tree/style-index "Previous repository")
