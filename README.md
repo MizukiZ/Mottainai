@@ -13,7 +13,7 @@ This application is the marketplace that connects backpackers and travelers in A
 ## User stories
 I made user stories to define what functionality my application should have.
 
-I basically managed my project using [Trello](https://trello.com/b/pq0IHI2D/project,"Trello").
+I basically managed my project using [Trello](https://trello.com/b/pq0IHI2D "Trello").
 
 ## Workflow diagram
 ![Workflow diagram ](https://github.com/MizukiZ/Mottainai/blob/readme-images/readme_image/workflow.JPG "ERD ")
@@ -43,4 +43,4 @@ repository.
 I would like to implement the search functionality that user can input how close the items should be (e.g. within 5km) and filter the items. Furthermore,  ban user account functionality to avoid bad users.
 
 ## Application on Heroku
-[Mottainai](https://mottainai-project.herokuapp.com, "Mottainai")
+[Mottainai](https://mottainai-project.herokuapp.com "Mottainai")
