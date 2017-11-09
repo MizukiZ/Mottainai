@@ -26,8 +26,8 @@ class Item < ApplicationRecord
   end
 
   def currency_conversion(user)
-    own_currency_code = user.profile.nationality_code.currency.code
-    own_currency_symbol = user.profile.nationality_code.currency.symbol
+    own_currency_code = user.profile.nationality_code.currency
+    own_currency_symbol = user.profile.nationality_code.currency.code
 
     acceptable_currency =[
       "AUD",
