@@ -7,6 +7,6 @@ class NotificationMailer < ApplicationMailer
   #
   def user_notification(user)
     @user = user
-    mail to: user.email, subject: "Premium account"
+    mail(to: user.email, subject: "Premium account")
   end
 end
