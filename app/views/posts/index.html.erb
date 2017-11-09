@@ -1,0 +1,73 @@
+<div class="container">
+
+  <% if @posts.empty? %>
+  <div class="col-12 text-center text-l text-danger">
+    You have not posted anything.
+  </div>
+
+  <% else %>  <!-- 3 -->
+
+  <div class="row items-margin bg-color box-shadow">
+
+    <div class="col-12 bg-info text-l margin-bottom font-weight-bold">
+      <%= fa_icon 'file-text-o', text: 'Posts' %>
+    </div>
+
+    <% @posts.each do |post| %>
+      <div class= 'col-12 font-weight-bold padding-0'>
+
+      <div class="row">
+        <div class="col-3 text-center">
+          <%= link_to image_tag(post.image, size: '60x60', class: 'image-frame d-md-none image-margin-left'), post %>
+
+          <%= link_to image_tag(post.image, size: '100x100', class: 'image-frame d-none d-md-block image-margin-left'), post %>
+        </div>
+
+
+        <!-- title -->
+        <div class="col-9">
+
+          <div class="row margin-bottom">
+
+            <div class="col-12 text-m font-weight-bold ">
+              <%= post.title %>
+            </div>
+
+          </div>
+
+          <!-- cost & select -->
+          <div class="row">
+
+            <div class="col-4 ext-center text-s font-weight-bold <%= "text-danger" if !post.chargeable? %>">
+              <%= post.chargeable? ? post.money_format : 'Free' %>
+            </div>
+
+            <div class="col-8 text-right">
+
+              <%= link_to edit_item_path(post),class:'col-6 select-word' do %>
+              <%= fa_icon 'pencil-square-o', text:'Edit' %>
+              <% end %> | <%= link_to item_path(post), method: :delete, data: {confirm: 'Are you sure?'},class:'col-6 select-word' do %>
+              <%= fa_icon 'trash-o', text:'Delete' %>
+              <% end %>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- hr line -->
+      <hr class="style4 margin-5">
+    </div>
+    <% end %> <!-- 16 -->
+    <% end %> <!-- 3 -->
+
+
+  </div>
+
+  <!-- pagenation -->
+  <div class="row justify-content-center">
+    <%= paginate @posts, theme: 'twitter-bootstrap-4' %>
+  </div>
+
+</div>

@@ -1,0 +1,106 @@
+<div class="container-fluid padding-0 home-image">
+  <div class="col-12 text-center text-l font-weight-bold text-light sentence margin-bottom-20">
+    We can reduce waste together
+  </div>
+  <!-- sorting systme -->
+  <div class="row">
+
+    <%= form_with url:items_path, local:true, method: :get, class: 'container-fluid' do |f|%>
+    <div class="row justify-content-center vertical-margin items-margin">
+      <%= f.text_field :words, placeholder: "item's title", class: 'col-9 form-control' %>
+    </div>
+    <div class="row justify-content-center vertical-margin items-margin margin">
+      <%= f.text_field :area, placeholder: "area", class: 'col-9 form-control' %>
+    </div>
+    <div class="row">
+      <div class="col-6 font-weight-bold text-light">
+        <div class="row justify-content-center items-margin">
+          <div class="col-8 text-center">
+            <%= f.label :free, 'Free items' %>
+            <%= f.check_box :free,id: 'free' %>
+          </div>
+        </div>
+        <div class="row justify-content-center items-margin">
+          <div class="col-8 text-center">
+          <%= f.label :category %>
+          <%= f.collection_select :category, Category.all, :id, :title, include_blank:"All" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 align-self-end text-center">
+        <%= button_tag type: 'submit', class: 'btn btn-outline-light' do %>
+        <%= fa_icon 'search', text: "Search" %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+
+  </div>
+</div>
+
+  <div class="container">
+
+  <!-- items-section -->
+  <div class="row">
+
+    <% @items.each do |item| %>
+    <div class="col-12 col-md-4">
+      <div class="row items-margin box-shadow padding-10 rounded item-hover">
+
+
+        <div class="col-5 d-md-none">
+          <%= link_to item do %>
+          <%= image_tag item.image, size:'100x100',class: 'image-frame' %>
+          <% end %>
+        </div>
+
+        <div class="col-12 d-none d-md-block text-center">
+          <%= link_to item do %>
+          <%= image_tag item.image, size: '165x150',class: 'image-frame' %>
+          <% end %>
+        </div>
+
+        <!-- title -->
+        <div class="col-7 col-md-12">
+          <div class="container padding-0">
+
+            <div class="row justify-content-center">
+              <div class="col-10 font-weight-bold text-center">
+                <%= item.title %>
+              </div>
+            </div>
+
+            <!-- are&price -->
+
+            <div class="row items-margin">
+              <div class="col-4 font-weight-bold <%= 'text-danger' if item.chargeable != true %>">
+                <%= item.chargeable == true ? item.money_format : 'Free!' %>
+              </div>
+              <div class="col-8 align-self-end">
+                by <%= link_to item.user.name , item.user.profile, class: 'link-word-user' %>
+              </div>
+            </div>
+
+            <div class="row area-color justify-content-end">
+              <div class="col text-right">
+                <%= item.area %>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <% end %>
+
+  </div>
+
+
+
+<!-- pagenation -->
+  <div class="row justify-content-center">
+    <%= paginate @items, theme: 'twitter-bootstrap-4' %>
+  </div>
+
+</div>

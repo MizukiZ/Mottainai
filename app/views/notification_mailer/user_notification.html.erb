@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Thanks <%= @user.name %> for upgrading to Premium</h1>
+    <p>
+      You are realdy to post your chargeable items!!<br>
+    </p>
+
+    <p> your transaction ID is <%= @user.upgrade.transaction_id %></p>
+    <p>Regards,<br>Mottainai.com</p>
+  </body>
+</html>

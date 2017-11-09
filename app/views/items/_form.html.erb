@@ -1,0 +1,80 @@
+<% if item.errors.any? %>
+<div class="container item-margin margin-top">
+  <div class="row">
+    <div class="col-12 bg-danger text-light text-center font-weight-bold"><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</div>
+
+    <% item.errors.full_messages.each do |message| %>
+    <div class="col-12 alert margin-0 font-weight-bold"><%= message %></div>
+    <% end %>
+
+  </div>
+</div>
+<% end %>
+
+<%= form_with model: item, local: true, class: 'container' do |form| %>
+<div class="row items-margin font-weight-bold text-m bg-color box-shadow text-center justify-content-center">
+
+  <!-- header -->
+  <div class="col-12 bg-info text-left text-l  font-weight-bold">
+     <%= head_text %>
+  </div>
+
+
+  <% if item.image.present? %>
+  <div class="col-12 col-md-4 text-center">
+    <%= image_tag item.image,size: '100x100',class: 'd-md-none items-margin image-frame' %>
+    <%= image_tag item.image,size: '200x200',class: 'd-none d-md-block items-margin image-frame' %>
+  </div>
+  <% end %>
+
+  <div class="col-12 col-md-8 items-margin align-self-end">
+    <%= form.label :image %>
+    <%= form.file_field :image, id: :item_image %>
+  </div>
+
+
+  <div class="col-12 items-margin">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :item_title, class: 'form-control', :placeholder => "Enter your item's title here." %>
+  </div>
+
+
+  <div class="col-12 items-margin">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :item_description, size:'70x10', class: 'form-control', :placeholder => "Enter your item's description here. Please incude the condition of your item." %>
+  </div>
+
+  <div class="col-12 items-margin">
+    <%= form.label :category_id %>
+    <%= form.collection_select :category_id, Category.all, :id, :title %>
+  </div>
+
+  <div class="col-12 items-margin">
+    <%= form.label :chargeable %>
+    <%= form.check_box :chargeable, id: :item_chargeable, disabled: !current_user.premium? %>
+  </div>
+
+  <div class="col-7 items-margin">
+    <%= form.label :cost %>
+    <% if !@item.cost.nil? %>
+    $ <%= form.text_field :cost, id: 'item_cost',class: 'form-control', :placeholder => "Item's cost here when it is chargeable. In AUD",value: @item.cost.to_f / 100, disabled: !current_user.premium? %>
+    <% else %>
+    $ <%= form.text_field :cost, id: 'item_cost',class: 'form-control', :placeholder => "Item's cost here when it is chargeable. In AUD", disabled: !current_user.premium? %>
+    <% end %>
+  </div>
+
+  <% if !current_user.premium? %>
+  <div class="col-12 text-s">
+    Your accout can post only free items. Upgrade from <%= link_to 'here', new_upgrade_path %>
+  </div>
+  <% end %>
+
+  <div class="col-12 text-center margin-top items-margin">
+    <%= button_tag type:'submit', class: 'btn btn-outline-primary col-8' do %>
+    <%= fa_icon icon, text: word %>
+    <% end %>
+  </div>
+
+</div>
+
+<% end %>

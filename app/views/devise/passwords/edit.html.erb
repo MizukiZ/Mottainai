@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row  items-margin bg-light rounded box-shadow">
+    <div class="col-12 text-l text-light bg-success font-weigth-bold">
+      Change your password?
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "container-fluid"}) do |f| %>
+    <%= devise_error_messages! %>
+    <%= f.hidden_field :reset_password_token %>
+
+    <div class="col-12 items-margin">
+      <%= f.label :password, "New password" %><br />
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+      <% end %>
+      <%= f.password_field :password, autofocus: true, autocomplete: "off", class: 'form-control' %>
+    </div>
+
+    <div class="col-12 items-margin">
+      <%= f.label :password_confirmation, "Confirm new password" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+    </div>
+
+    <div class="row items-margin justify-content-center">
+      <%= button_tag "style", class: 'btn btn-outline-success col-8 text-center' do %>
+      <%= fa_icon 'key', text:'Change password' %>
+      <% end %>
+    </div>
+
+    <% end %>
+
+  </div>
+  <%= render "devise/shared/links" %>
+</div>

@@ -1,0 +1,211 @@
+<!-- error message -->
+<% if flash[:profile_error]%>
+<div class="row justify-content-center">
+  <div class="col-9 text-center alert">
+    <%= flash[:profile_error] %>
+  </div>
+</div>
+<% end %>
+
+
+<div class="container">
+  <!-- profile image -->
+  <div class="row profile-margin-top justify-content-center box-shadow margin-bottom-20 bg-color">
+
+    <div class="col-5 text-center">
+      <%= image_tag @profile.image, size: '120x120', class: 'rounded profile-pic-marign' %>
+    </div>
+
+    <!-- name & area -->
+    <div class="col-7">
+      <div class="row">
+      <div class="<%= @profile.user.premium? ? "col-7" : "col-12" %> text-l font-weight-bold items-margin">
+        <%= @profile.full_name %>
+      </div>
+
+      <% if @profile.user.premium? %>
+      <div class="col-5">
+        <div class="text-f font-weight-bold items-margin premium-mark box-shadow">
+          PREMIUM
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+      <div class="col-12 text-m text-muted">
+        <%= @profile.city %>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- message button -->
+  <% if current_user != @profile.user %>
+  <div class="row section-margin padding-0">
+
+    <% if !Conversation.between(current_user,@profile.user.id).present? %>
+
+    <%= link_to conversations_path(user2_id: @profile.user.id), method: :post, class: 'btn btn-primary col-12' do %>
+    <%= fa_icon 'comments', text: "Send message" %>
+
+    <% end %>
+    <% else %>
+
+    <% @conversation = Conversation.between(current_user,@profile.user.id).first %>
+    <%= link_to conversation_path(@conversation.id), class: 'btn btn-outline-primary col-12' do %>
+    <%= fa_icon 'comments', text: "Send message" %>
+    <% end %>
+    <% end %>
+  </div>
+  <% end %>
+
+  <% if current_user == @profile.user%>
+  <div class="row">
+    <div class="col-12 col-md-6 section-margin ">
+
+      <!-- title & hr -->
+      <div class="col-12 text-m">
+        User detals
+      </div>
+      <hr class="style5">
+
+      <!-- image change -->
+      <%= form_with model: @profile, method: :put, class: 'col-12 margin-bottom-20 profile-margin-top' do |f| %>
+      <%= f.label :image do %>
+      <%= fa_icon "file-image-o", class: "fa-2x"%>
+      <%= f.file_field :image, id: 'profile_image',style: "display:none;" %>
+      <% end %>
+      <%= f.button 'change the image', class: 'btn btn-outline-info btn-sm' %>
+      <% end %>
+
+      <!-- user details -->
+      <%= form_with model: @profile, method: :put, class:"col-12 margin-bottom-20 " do |f| %>
+      <div class="col-12">
+        <%= f.label :first_name, "First name" %>
+        <%= f.text_field :first_name, class: 'form-control' %>
+      </div>
+      <div class="col-12">
+        <%= f.label :last_name, "Last name" %>
+        <%= f.text_field :last_name, class: 'form-control' %>
+      </div>
+      <div class="col-12">
+        <%= f.label :city, 'Currnet Area' %>
+        <%= f.text_field :city, class: 'form-control' %>
+      </div>
+      <div class="col-12 text-right items-margin">
+        <%= f.button "Update", class: 'btn btn-outline-primary btn-sm' %>
+      </div>
+      <% end %>
+    </div>
+
+    <% else %>
+
+    <!-- posts title &  hr -->
+    <div class="row">
+      <div class="col-12 col-md-6 section-margin ">
+
+        <div class="row">
+        <div class="col-9 text-m">
+          Posts
+        </div>
+        <div class="col-3 text-rigth">
+
+    <!-- all or five finctionality -->
+          <% if @items_over_five == true && @items_view_all == false %>
+          <%= link_to 'all', profile_path(@profile.id, items_all: true) %>
+          <% elsif @items_view_all == true && @items_over_five == true %>
+          <%= link_to 'show five', profile_path(@profile.id, items_all: false) %>
+          <% end %>
+
+        </div>
+      </div>
+
+        <hr class="style5">
+
+
+        <% @items.each do |item| %>
+
+        <div class="row items-margin">
+
+          <div class="col-4 font-weight-bold text-s">
+            <%= link_to item.title, item, class: 'link-word-black' %>
+          </div>
+          <div class="col-4 font-weight-bold <%= "text-danger" if !item.chargeable? %>">
+            <%= item.chargeable? ? item.money_format : "Free!" %>
+          </div>
+          <div class="col-4">
+            <%= item.time_format_days %>
+          </div>
+
+        </div>
+        <hr class="style4">
+        <% end %>
+      </div>
+      <% end %>
+
+
+
+      <div class="col-12 col-md-6 section-margin ">
+
+        <!-- title & hr -->
+        <div class="row">
+        <div class="col-9 text-m">
+          <%= current_user == @profile.user ? "Comments for you" : "Comments"%>
+        </div>
+        <div class="col-3 text-rigth">
+
+    <!-- all or five finctionality -->
+          <% if @comment_over_five == true && @comment_view_all == false %>
+          <%= link_to 'all', profile_path(@profile.id, comment_all: true) %>
+          <% elsif @comment_view_all == true && @comment_over_five == true %>
+          <%= link_to 'show five', profile_path(@profile.id, comment_all: false) %>
+          <% end %>
+
+        </div>
+      </div>
+
+        <hr class="style5">
+
+
+        <!-- comments -->
+        <% @comments.each do |comment| %>
+        <div class="row items-margin ">
+
+          <div class="col-6 font-weight-bold">
+            <%= comment.body %>
+          </div>
+
+          <div class="col-4">
+            from <%= link_to comment.commenter.name, profile_path(comment.commenter.profile.id), class:'link-word-user' %>
+          </div>
+
+          <% if current_user == comment.commenter%>
+          <div class="col-2">
+            <%= link_to 'delete', profile_comment_path(@profile, comment), method: :delete, data:{confirm: 'Are you sure?'}, class: 'text-danger' %>
+          </div>
+          <% end %>
+        </div>
+
+        <hr class="style4">
+        <% end %>
+
+      </div>
+    </div>
+
+
+
+    <!-- leave comment -->
+    <% if current_user != @profile.user %>
+
+    <%= form_with model: @comment, url: profile_comments_path(@profile.id), local:true, class: 'row justify-content-center' do |f| %>
+
+
+    <%= f.text_field :body, class: 'form-control col-7' %>
+    <%= button_tag type:'submit', class: 'btn btn-outline-info btn-sm col-3 text-f' do %>
+    <%= fa_icon 'commenting-o', text: 'Comment' %>
+    <% end %>
+    <% end %>
+    <% end %>
+
+
+  </div>

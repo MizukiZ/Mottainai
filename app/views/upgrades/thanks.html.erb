@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row justify-content-center bg-color box-shadow items-margin">
+
+    <div class="text-center items-margin">
+      <%= image_tag 'check', size:'120x120', class:'d-md-none' %>
+      <%= image_tag 'check', size:'200x200', class:'d-none d-md-block' %>
+    </div>
+
+  <div class="col-12 text-center text-l font-weight-bold items-margin">
+    Thank you !
+  </div>
+
+  <div class="col-12 text-center text-m font-weight-bold items-margin">
+    Now you are ready to sell your items!
+  </div>
+
+  <div class="col-12 text-center text-s font-weight-bold margin-top">
+    Your transaction ID is
+  </div>
+
+  <div class="col-11 text-center text-s font-weight-bold bg-dark text-light rounded margin-bottom-20">
+     <%= current_user.upgrade.transaction_id %>
+  </div>
+
+<div class="col-11 text-center text-danger">
+  We have sent an email to the registered email address.
+</div>
+
+</div>
+
+</div>

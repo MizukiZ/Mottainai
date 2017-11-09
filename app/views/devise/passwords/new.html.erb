@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row  items-margin bg-light rounded box-shadow">
+    <div class="col-12 text-l text-light bg-dark font-weigth-bold">
+      Forget your password?
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post },html: { class: "container-fluid"}) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div class="col-12 items-margin">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+    </div>
+
+    <div class="row items-margin justify-content-center">
+      <%= button_tag "style", class: 'btn btn-outline-dark col-8 text-center' do %>
+      <%= fa_icon 'unlock-alt ', text:'Reset password' %>
+      <% end %>
+    </div>
+    <% end %>
+
+  </div>
+  <%= render "devise/shared/links" %>
+</div>

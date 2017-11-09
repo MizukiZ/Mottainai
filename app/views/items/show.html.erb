@@ -1,0 +1,97 @@
+<div class="container">
+
+  <!-- item image -->
+  <div class="row">
+    <div class="col-12 col-md-7">
+      <div class="row bg-color box-shadow items-margin">
+
+        <div class="col-12 items-margin">
+          <%= image_tag @item.image, width:'100%', style: 'max-width:100%; max-height:400px; height:auto;', class: "image-frame"%>
+        </div>
+
+        <!-- title, price & date -->
+
+        <div class="col-12 font-weight-bold text-m items-margin-s">
+          <%= @item.title %>
+        </div>
+
+
+
+          <div class="text-center col-4 items-margin text-s font-weight-bold <%= 'text-danger' if !@item.chargeable? %>">
+            <% if @currency_convert == true %>
+            <%= @item.currency_conversion current_user %>
+            <% else %>
+            <%= @item.chargeable? ? @item.money_format : 'Free!' %>
+            <% end %>
+          </div>
+
+          <div class="col-8 items-margin font-weight-bold">
+            <% if @item.chargeable? %>
+            <% if @currency_convert == false %>
+            <%= link_to item_path(@item.id, conversion: "y"), class: 'link-word-user' do %>
+            <%= fa_icon 'money', text: 'convert to your country currency' %>
+            <% end %>
+            <% else %>
+            <%= link_to item_path(@item.id, conversion: "n"), class: 'link-word-user' do %>
+            <%= fa_icon 'dollar', text: "See this price in AUD" %>
+            <% end %>
+            <% end %>
+            <% end %>
+          </div>
+
+
+        <div class="col-12 margin-bottom text-right">
+          Posted at <%= @item.time_format %>
+        </div>
+
+        <div class="col-12 items-margin">
+          <%= @item.description %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-5 margin-top">
+      <!-- google map -->
+      <div class="col-12 text-center padding-0 margin-bottom">
+        <div class="col-12 text-center bg-dark font-wight-bold text-light">
+          <%= @item.area %>
+        </div>
+        <iframe  width = "100%" src="https://www.google.com/maps/embed/v1/place?key=<%= ENV.fetch('GOOGLE_MAP_KEY') %>&q=<%= @item.area%>,Australia">
+        </iframe>
+      </div>
+
+
+      <!-- profile -->
+
+
+      <% if current_user != @item.user %>
+      <div class="col-12 bg-color  box-shadow padding-10">
+
+        <div class="row circle-pic">
+          <div class="col-4 margin-0">
+            <%= image_tag @item.user.profile.image, size: "50x50", class: 'rounded-circle' %>
+          </div>
+          <div class="col-7 text-l font-weight-bold">
+            <%= @item.user.name %>
+          </div>
+        </div>
+
+        <div class="col-7 margin-bottom text-left padding-0">
+          <%= link_to 'check profile', profile_path(@item.user.profile.id) %>
+        </div>
+
+        <% if !Conversation.between(current_user,@item.user.id).present? %>
+        <%= link_to conversations_path(user2_id: @item.user.id), method: :post, class: 'col-12 btn btn btn-outline-dark' do %>
+        <%= fa_icon 'comments', text: "Send message" %>
+        <% end %>
+        <% else %>
+        <% @conversation = Conversation.between(current_user,@item.user.id).first %>
+        <%= link_to conversation_path(@conversation.id), class: 'btn btn-outline-dark col-12' do %>
+        <%= fa_icon 'comments', text: "Send message" %>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

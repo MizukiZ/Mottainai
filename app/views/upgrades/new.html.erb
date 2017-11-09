@@ -1,0 +1,66 @@
+<div class="container">
+  <% if current_user.premium? %>
+  <div class="col-12 text-l font-weight-bold text-center text-danger">
+    You account is already prmium!
+  </div>
+
+  <% else %>
+  <div class="bg-color box-shadow margin-top">
+    <div class="container-fluid upgrade-image">
+
+    </div>
+
+    <div class="row justify-content-center text-l font-weight-bold margin-bottom">
+      Premium acoount
+    </div>
+
+    <div class="row justify-content-center text-m font-weight-bold items-margin">
+      <div class="col-9 text-center">
+        You will be able to post chargeable Items!
+      </div>
+    </div>
+
+
+    <div class="row justify-content-center items-margin">
+      <%= form_with model: @upgrade do |f|%>
+      <article>
+        <% if flash[:error].present? %>
+        <div id="error_explanation">
+          <p><%= flash[:error] %></p>
+        </div>
+        <% end %>
+      </article>
+
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+      data-description="Upgrade to Premium"
+      data-email = "<%= current_user.email %>"
+      data-amount="500"
+      data-currency="aud"
+      data-locale="auto"></script>
+      <% end %>
+    </div>
+
+    <div class="row justify-content-center text-l text-danger items-margin">
+      Only $5
+    </div>
+
+    <% end %>
+
+  </div>
+
+</div>
+
+
+<!-- custom stripe button -->
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".stripe-button-el span").remove();
+  $("button.stripe-button-el").removeAttr('style').css({
+    "display":"inline-block",
+    "width":"100%",
+    "padding":"15px",
+    "background":"rgb(34, 105, 226)",
+    "color":"white" }).html("Upgrade Now!");
+  });
+  </script>

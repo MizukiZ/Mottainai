@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RailsProject</title>
+  <%= csrf_meta_tags %>
+  <!-- google font -->
+  <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Shadows+Into+Light" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+  <%= render 'layouts/header' %>
+  <% if flash[:notice]%>
+  <p class="notice"><%= notice %></p>
+  <% elsif flash[:alert] %>
+  <p class="alert"><%= alert %></p>
+  <% end %>
+  <%= yield %>
+  <%= render 'layouts/footer' %>
+</body>
+</html>

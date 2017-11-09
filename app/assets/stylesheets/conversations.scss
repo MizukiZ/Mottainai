@@ -1,0 +1,35 @@
+// Place all the styles related to the conversations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com
+//
+.message-cards{
+  background: #F2F2F2;
+  padding:0;
+  margin: 5px 0;
+  opacity: 0.8;
+  transition: opacity 0.4s;
+  transition: transform 0.4s;
+}
+
+.message-cards:hover{
+  background: #F2F2F2;
+  text-decoration: none;
+  opacity: 1;
+  transform: translate(2px, 0);
+}
+
+.margin-5{
+  margin:10px 0 5px 0;
+}
+
+.image-margin-left{
+  margin-left: 10px;
+}
+
+.bg-your-message {
+  background :  rgb(45, 176, 241);
+}
+
+.line-height-message{
+  line-height: 40px;
+}

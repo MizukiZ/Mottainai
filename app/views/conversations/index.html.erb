@@ -1,0 +1,87 @@
+<div class="container">
+
+  <% if @pagenate_conversations.empty? %>
+  <div class="col-12 text-center text-l text-danger">
+    You do not have any conversations with other users.
+  </div>
+
+  <% else %>  <!-- 3 -->
+
+  <div class="row items-margin bg-color box-shadow">
+
+    <div class="col-12 bg-info text-l font-weight-bold">
+      <%= fa_icon 'comments-o', text: 'Messages' %>
+    </div>
+
+    <% @pagenate_conversations.each do |conversation| %>
+      <%= link_to conversation, class:'col-12 font-weight-bold message-cards link-word-black' do%>
+
+      <div class="row">
+        <div class="col-3 text-center">
+
+          <!-- user judge -->
+          <% if conversation.user1 == current_user %>
+          <% user = conversation.user2 %>
+          <% else %> <!-- 23 -->
+          <% user = conversation.user1 %>
+          <% end %> <!-- 23 -->
+
+          <%= image_tag user.profile.image, size: '60x60', class: 'rounded d-md-none image-margin-left' %>
+
+          <%= image_tag user.profile.image, size: '100x100', class: 'rounded d-none d-md-block image-margin-left' %>
+
+        </div>
+
+
+        <!-- name & new -->
+        <div class="col-9">
+          <div class="row margin-bottom">
+
+            <div class="col-7 text-center text-s font-weight-bold ">
+              <%= user.name %>
+            </div>
+
+            <% if conversation.messages.where.not(user_id: current_user.id).last.present? %>
+            <% if conversation.messages.where.not(user_id: current_user.id).last.read == false %>
+            <div class="col-4 text-right text-danger font-weight-bold text-s">
+              New!
+            </div>
+            <% end %> <!-- 41 -->
+            <% end %> <!-- 42 -->
+
+          </div>
+
+          <!-- last message & date-->
+          <div class="row">
+            <% if conversation.messages.present? %>
+
+            <div class="col-7 text-muted padding-0 text-center">
+              <%= conversation.messages.last.body %>
+            </div>
+
+            <div class="col-4">
+              <%=  conversation.messages.last.time_format %>
+            </div>
+
+            <% end %> <!-- 53 -->
+          </div>
+
+        </div>
+      </div>
+
+      <!-- hr line -->
+      <hr class="style4 margin-5">
+
+    <% end %>
+    <% end %> <!-- 16 -->
+    <% end %> <!-- 3 -->
+
+
+  </div>
+
+  <!-- pagenation -->
+  <div class="row justify-content-center">
+    <%= paginate @pagenate_conversations, theme: 'twitter-bootstrap-4' %>
+  </div>
+
+</div>

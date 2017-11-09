@@ -1,0 +1,90 @@
+
+<!-- other user judge -->
+  <% if @conversation.user1 == current_user %>
+  <% other = @conversation.user2 %>
+  <% else %>
+  <% other = @conversation.user1 %>
+  <% end %>
+
+
+  <!-- header -->
+  <div class="container-fluid">
+
+  <div class="row bg-info text-m font-weight-bold margin-bottom-20">
+
+    <div class="col-5 text-center">
+      <%= other.name %>
+    </div>
+
+    <div class="col-5 text-right text-s">
+      <% if @over_ten == true && @view_all == false %>
+      <%= link_to "view all", conversation_path(@conversation.id,view: "all"), class: 'link-word' %>
+      <% elsif @over_ten == true &&@view_all == true %>
+      <%= link_to "view 10", conversation_path(@conversation.id,view: "ten"), class: 'link-word' %>
+      <% end %>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="container">
+
+  <% @messages.each do |message| %>
+
+
+  <!-- put left or right -->
+  <div class="row justify-content-<%= message.user_id == current_user.id ? "end" : "start" %>">
+
+    <!-- read function & time -->
+    <% if message.read == true && message.user == current_user %>
+    <%=  fa_icon "check"%>
+    <% end %>
+    <% if message.user_id == current_user.id %>
+    <%= message.time_format %>
+    <% end %>
+
+    <!-- color -->
+    <div class="col-8 col-md-5 <%= message.user_id == current_user.id ? "bg-your-message" : "bg-custom" %> margin-bottom rounded font-weight-bold text-center line-height-message">
+
+      <!-- image -->
+      <% if message.image.present? %>
+      <%=  image_tag message.image, size: '100x100',class: 'items-margin'%><br>
+      <% end %>
+
+      <%= message.body %>
+
+    </div>
+
+    <% if message.user_id != current_user.id %>
+    <%= message.time_format %>
+    <% end %>
+
+  </div>
+  <% end %>
+
+
+  <!-- error message -->
+  <% if flash[:message_alert]%>
+  <div class="row justify-content-center">
+    <div class="col-9 text-center alert">
+      <%= flash[:message_alert] %>
+    </div>
+  </div>
+  <% end %>
+
+  <div class="col-12">
+    <%= form_with model: [@conversation, @new_message], local:true, method: :post, class: 'row' do |f| %>
+
+    <%= f.label :image, class: "col-2 text-right" do %>
+    <%= fa_icon "file-image-o", class: "fa-2x"%>
+    <%= f.file_field :image, id: 'message_image',style: "display:none;" %>
+    <% end %>
+
+    <%= f.text_field :body, class: "form-control col-10 col-md-8" %>
+    <%= button_tag type:"submit", class: 'btn btn-outline-info col-12 col-md-2' do %>
+    <%= fa_icon 'send-o', text: 'Send' %>
+    <% end %>
+    <% end %>
+  </div>
+</div>

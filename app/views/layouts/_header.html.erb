@@ -1,0 +1,57 @@
+<div class="container-fluid sticky-top header">
+  <div class="row justify-content logo">
+    <div class="col-12 ">
+      <%= link_to items_path, class: 'link-word-logo' do %>
+      <%= image_tag 'logo', size:'60x60' %>
+      Mottainai
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row justify-content-start">
+    <!-- if user is loged in -->
+    <% if user_signed_in? %>
+    <div class="dropdown col-4">
+      <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Account
+      </button>
+
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" data-turbolinks="false">
+
+        <a class="dropdown-item" href=<%= current_user.has_profile? && !current_user.profile.id.nil? ?
+        profile_path(current_user.profile.id) : new_profile_path %>>Profile</a>
+        <div class="dropdown-divider"></div>
+
+        <a class="dropdown-item" href=<%= posts_path %>>My posts</a>
+        <div class="dropdown-divider"></div>
+
+        <a class="dropdown-item <%= "text-danger  font-weight-bold" if @notification == true %>" href=<%= conversations_path %>>Messages</a>
+
+        <% if current_user.profile.present? %>
+        <% if !current_user.premium? %>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href=<%= new_upgrade_path %>>Upgrade</a>
+        <% end %>
+        <% end %>
+
+      </div>
+
+    </div>
+    <% else %>
+    <div class="col-4">
+      <!-- for space -->
+    </div>
+    <% end %>
+
+    <div class="col-1">
+      <!-- for space -->
+    </div>
+
+    <%= link_to 'New post', new_item_path, class: 'link-word text-center col-3 header-select' %>
+    <% if user_signed_in? %>
+    <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'link-word col-3 text-center header-select' %>
+    <% else %>
+    <%= link_to "Sign in", new_user_session_path, class: 'link-word text-center col-3 header-select' %>
+    <% end %>
+  </div>
+</div>

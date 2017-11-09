@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row  items-margin bg-light rounded box-shadow">
+    <div class="col-12 text-l text-light bg-primary font-weigth-bold">
+      Sign up
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name),html: { class: "container-fluid"}) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div class="col-12 items-margin">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+    </div>
+
+    <div class="col-12 items-margin">
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+    </div>
+
+    <div class="col-12 items-margin">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+    </div>
+
+    <div class="row items-margin justify-content-center">
+      <%= button_tag "style", class: 'btn btn-outline-primary col-8 text-center' do %>
+      <%= fa_icon 'user-plus', text:'Sign up' %>
+      <% end %>
+    </div>
+    <% end %>
+
+
+  </div>
+  <%= render "devise/shared/links" %>
+</div>

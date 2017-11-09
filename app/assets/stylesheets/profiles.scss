@@ -1,0 +1,48 @@
+// Place all the styles related to the profiles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.profile-margin-top{
+  margin-top: 10px;
+}
+
+.profile-pic-marign{
+  margin:5px;
+}
+
+.margin-top-20{
+  margin-top: 20px;
+}
+
+.link-word-black{
+  color:black;
+}
+.link-word-black:hover{
+  color:black;
+  opacity: 0.7;
+  text-decoration: none
+}
+
+.section-margin{
+  margin:15px 0;
+  padding:5px;
+}
+
+// stamp premium
+
+.premium-mark {
+  max-width: 150px;
+  text-align: center;
+  padding:5px;
+  line-height: 30px;
+  color:rgb(130, 110, 3);
+  text-shadow: -1px -1px 1px #000000, 1px 1px #ffffff;
+  background:image-url('bg-gold');
+  background-size: 100% 100%;
+  border-radius: 5px;
+  }
+
+.bg-gold{
+  background:image-url('bg-gold');
+  background-size: 100% 100%;
+}

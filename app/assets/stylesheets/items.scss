@@ -1,0 +1,113 @@
+// Place all the styles related to the Items controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.margin-top{
+  margin-top:15px;
+}
+
+.items-margin{
+  margin:15px 0;
+}
+
+.items-margin-s{
+  margin:7px 0;
+}
+
+.item-bg{
+  background:rgb(255, 236, 248);
+}
+
+.searchsection-margin-padding{
+  margin:20px 0;
+  padding: 10px;
+}
+
+
+.box-shadow {
+  -moz-box-shadow: 0 0 5px #888;
+  -webkit-box-shadow: 0 0 5px#888;
+  box-shadow: 0 0 5px #888;
+}
+
+.area-color{
+  color:rgb(170, 170, 170);
+}
+
+.link-word-user{
+  color:rgb(12, 164, 93);
+}
+.link-word-user:hover{
+  opacity: 0.7;
+  color:rgb(12, 164, 93);
+  text-decoration: none
+}
+
+.circle-pic{
+  line-height: 50px
+}
+
+// hover effect
+
+.item-hover{
+  background: #F2F2F2;
+  opacity: 0.8;
+  transition:opacity 0.4s,transform 0.4s,box-shadow 0.4s;
+}
+.item-hover:hover{
+  background: #F2F2F2;
+  opacity: 1;
+  transform: translate(0, -2px);
+  box-shadow: 0px 4px 3px -2px rgba(0,0,0,0.6);
+}
+
+.home-image{
+  position: relative;
+  height:100%;
+  weight:100%;
+  background:image-url('home-pic') center center no-repeat;
+  box-sizing: border-box;
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+  height: 400px;
+  padding-top: 66%;
+
+}
+
+.home-image:before {
+  z-index: 0;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color:rgba(0,0,0,0.5);
+}
+
+.sentence{
+  font-family: 'Shadows Into Light', cursive;
+  margin-top: 0;
+}
+
+
+
+// break-point
+@media (max-width: 767px) {
+  input[type='checkbox'] {
+    margin-top: 3px;
+    margin-left: 5px;
+  }
+
+}
+
+@media (min-width: 768px) {
+  input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+
+}
