@@ -45,7 +45,7 @@
     <% end %>
 
     <!-- color -->
-    <div class="col-8 col-md-5 <%= message.user_id == current_user.id ? "bg-your-message" : "bg-custom" %> margin-bottom rounded font-weight-bold text-center line-height-message">
+    <div class="col-8 col-md-5 <%= message.user_id == current_user.id ? "bg-your-message" : "bg-color" %> margin-bottom rounded font-weight-bold text-center line-height-message box-shadow">
 
       <!-- image -->
       <% if message.image.present? %>
