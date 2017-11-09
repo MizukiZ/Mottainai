@@ -23,7 +23,7 @@ Low fidelity wireframes on [Figma](https://www.figma.com/file/beBNSRUoIFpYrDXqko
 
 
 ## Entity Relationship Diagram
-![Database design ](https://github.com/MizukiZ/Mottainai/blob/readme-images/readme_image/workflow.JPG here "ERD ")
+![Database design ](https://github.com/MizukiZ/Mottainai/blob/readme-images/readme_image/workflow.JPG "ERD ")
 
 ## Duration
 Approximately 100 hours.
