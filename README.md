@@ -4,7 +4,7 @@
 
 ## Description
 
-The web site is called ***Mottainai****. Mottainai is thought of as an all-encompassing Japanese term for the four Rs: **reduce**, **reuse**, **recycle** and **respect**. This meaning is exactly what the concept of this project.
+The web site is called ***Mottainai***. Mottainai is thought of as an all-encompassing Japanese term for the four Rs: **reduce**, **reuse**, **recycle** and **respect**. This meaning is exactly what the concept of this project.
 
 As I used to be one of backpackers, I had situations that I had to throw many stuffs which were still usable since I moved frequently. Each time I threw things I felt really guilty. So I thought It would be nice if I can give or sell my belongings to other backpackers, and vice verse.
 
@@ -23,10 +23,10 @@ Low fidelity wireframes on [Figma](https://www.figma.com/file/beBNSRUoIFpYrDXqko
 
 
 ## Entity Relationship Diagram
-![Database design ](https://github.com/MizukiZ/Mottainai/blob/readme-images/readme_image/workflow.JPG here "ERD ")
+![Database design ](https://github.com/MizukiZ/Mottainai/blob/readme-images/readme_image/workflow.JPG "ERD ")
 
 ## Duration
-Approximately 100 hours.
+Approximately 110 hours.
 
 ## Challenge
 My biggest challenge was to list user conversations by inside message's created time(the recent conversation room the user was in). First, I was trying to reach the message's created time data using Activerecord query interface but, it did not work as I expected so I searched and found **touch ** method. The associated object will be touched when a belonged object is either saved or destroyed. Therefore, I could list the user conversations by its updated_at data.
