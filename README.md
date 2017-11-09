@@ -31,7 +31,7 @@ Approximately 100 hours.
 ## Challenge
 My biggest challenge was to list user conversations by inside message's created time(the recent conversation room the user was in). First, I was trying to reach the message's created time data using Activerecord query interface but, it did not work as I expected so I searched and found **touch ** method. The associated object will be touched when a belonged object is either saved or destroyed. Therefore, I could list the user conversations by its updated_at data.
 
-![touch method ](url "touch method")
+![touch method ](https://github.com/MizukiZ/Mottainai/blob/readme-images/readme_image/touch%20method.JPG "touch method")
 
 And, also I had two problems when I deployed on heroku. That were Assets pipeline issue and mailgun production setting. It took me some time to figure out.
 
