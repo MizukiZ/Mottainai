@@ -16,20 +16,19 @@ I made user stories to define what functionality my application should have.
 I basically managed my project using [Trello](https://trello.com/b/pq0IHI2D/project,"Trello").
 
 ## Workflow diagram
-![Workflow diagram ](https://github.com/MizukiZ/Mottainai/blob/readme-images/readme_image/ERD.png "Workflow ")
+![Workflow diagram ](https://github.com/MizukiZ/Mottainai/blob/readme-images/readme_image/workflow.JPG "ERD ")
 
 ## Wireframe
 Low fidelity wireframes on [Figma](https://www.figma.com/file/beBNSRUoIFpYrDXqkoxPvNM6/Project-mottainai,"Figma"). Both mobile and desktop design. Also includes color scheme.
 
 
 ## Entity Relationship Diagram
-![Database design ](https://github.com/MizukiZ/Mottainai/blob/readme-images/readme_image/workflow.JPG "ERD ")
-
+![Database design ](https://github.com/MizukiZ/Mottainai/blob/readme-images/readme_image/ERD.png "Workflow ")
 ## Duration
 Approximately 110 hours.
 
 ## Challenge
-My biggest challenge was to list user conversations by inside message's created time(the recent conversation room the user was in). First, I was trying to reach the message's created time data using Activerecord query interface but, it did not work as I expected so I searched and found **touch ** method. The associated object will be touched when a belonged object is either saved or destroyed. Therefore, I could list the user conversations by its updated_at data.
+My biggest challenge was to list user conversations by inside message's created time(the recent conversation room the user was in). First, I was trying to reach the message's created time data using Activerecord query interface but, it did not work as I expected so I searched and found **touch** method. The associated object will be touched when a belonged object is either saved or destroyed. Therefore, I could list the user conversations by its updated_at data.
 
 ![touch method ](https://github.com/MizukiZ/Mottainai/blob/readme-images/readme_image/touch%20method.JPG "touch method")
 
